@@ -53,7 +53,7 @@ func (r *repoImpl) Get(id *domain.TodoID) (domain.Todo, domain.TodoRepoError) {
 func (r *repoImpl) List() []domain.Todo {
 	r.mutex.Lock()
 	defer r.mutex.Unlock()
-	var retrieved []domain.Todo
+	retrieved := make([]domain.Todo, 0, len(r.stored))
 	for id, v := range r.stored {
 		retrieved = append(retrieved, domain.Todo{
 			ID:   id,
