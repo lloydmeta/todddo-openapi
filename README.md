@@ -1,4 +1,4 @@
-## Golang exploration
+## Golang exploration [![Build Status](https://travis-ci.org/lloydmeta/todddo-openapi.svg?branch=master)](https://travis-ci.org/lloydmeta/todddo-openapi)
 
 A simple Todo list server implementation, but explores:
 

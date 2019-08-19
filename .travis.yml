@@ -1,0 +1,14 @@
+sudo: false
+language: go
+go:
+  - 1.11.x
+  - 1.12.x
+  - master
+matrix:
+  allow_failures:
+    - go: master
+  fast_finish: true
+script:
+  - diff -u <(echo -n) <(gofmt -d -s .)
+  - go vet ./...
+  - go test -v -race ./...

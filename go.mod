@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/corpix/uarand v0.1.0 // indirect
+	github.com/gin-contrib/gzip v0.0.1
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-openapi/spec v0.19.2 // indirect
 	github.com/go-openapi/swag v0.19.4 // indirect
