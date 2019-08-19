@@ -1,0 +1,180 @@
+basePath: /
+definitions:
+  models.Error:
+    properties:
+      message:
+        example: Something went wrong :(
+        type: string
+    required:
+    - message
+    type: object
+  models.Success:
+    properties:
+      message:
+        example: Something went right!
+        type: string
+    required:
+    - message
+    type: object
+  models.Todo:
+    properties:
+      id:
+        example: 1
+        type: integer
+      task:
+        example: Buy milk and eggs
+        type: string
+    required:
+    - id
+    - task
+    type: object
+  models.TodoData:
+    properties:
+      task:
+        example: Buy milk and eggs
+        type: string
+    required:
+    - task
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: A simple Todo list
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Todo list API
+  version: "1.0"
+paths:
+  /tasks:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves all persisted Todos
+      operationId: list-existing-todos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Todo'
+            type: array
+      summary: List all existing Todos
+    post:
+      consumes:
+      - application/json
+      description: Creates a new Todo
+      operationId: create-todo
+      parameters:
+      - description: The request body
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/models.TodoData'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Todo'
+            type: object
+        "400":
+          description: Task cannot be empty
+          schema:
+            $ref: '#/definitions/models.Error'
+            type: object
+      summary: Add a new Todo
+  /tasks/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes an existing Todo
+      operationId: delete-todo
+      parameters:
+      - description: The id of the todo you want to delete
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Success'
+            type: object
+        "404":
+          description: Task does not exist
+          schema:
+            $ref: '#/definitions/models.Error'
+            type: object
+      summary: Delete an existing Todo
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a persisted Todo
+      operationId: get-existing-todo
+      parameters:
+      - description: The id of the todo you want to retrieve
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Todo'
+            type: object
+        "404":
+          description: Task does not exist
+          schema:
+            $ref: '#/definitions/models.Error'
+            type: object
+      summary: Get a Todo by id
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing Todo
+      operationId: update-todo
+      parameters:
+      - description: The request body
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/models.TodoData'
+          type: object
+      - description: The id of the todo you want to update
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Todo'
+            type: object
+        "400":
+          description: Task cannot be empty
+          schema:
+            $ref: '#/definitions/models.Error'
+            type: object
+        "404":
+          description: Task does not exist
+          schema:
+            $ref: '#/definitions/models.Error'
+            type: object
+      summary: Update an existing Todo
+swagger: "2.0"
