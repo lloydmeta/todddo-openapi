@@ -13,6 +13,7 @@ A simple Todo list server implementation, but explores:
 3. Go test, with an eye on maximising testability by enabling mocking of interfaces.
 4. Auto-generated Swagger/OpenAPI clients via [Swaggo](https://github.com/swaggo/swag)
 5. Easy to understand dependency-injection by building a components graph by hand
+6. The [Gin](https://gin-gonic.com) web framework
 
 
 ### Usage
